@@ -1,2 +1,0 @@
-# DSA
-Leetcode and Gresksforgreeks
