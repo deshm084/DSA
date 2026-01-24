@@ -5,11 +5,6 @@ class Solution:
         n = len(haystack)
         m = len(needle)
         for i in range(n - m + 1):
-            match = True
-            for j in range(m):
-                if haystack[i + j] != needle[j]:
-                    match = False
-                    break
-            if match:
+            if haystack[i:i + m] == needle:
                 return i
-        return -1        
+        return -1
