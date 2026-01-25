@@ -1,23 +1,22 @@
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
         result = []
-        def backtrack(index, parts, current_ip):
-            if parts == 4 and index == len(s):
-                result.append(".".join(current_ip))
+        parts = []
+        def backtrack(index):
+            if len(parts) == 4:
+                if index == len(s):
+                    result.append(".".join(parts))
                 return
-            if parts == 4 or index == len(s):
-                return 
-            for length in range (1, 4):
+            for length in range(1, 4):
                 if index + length > len(s):
                     break
-                part = s[index:index + length]
-                if part.startswith('0') and len(part) > 1:
+                part  = s[index:index + length] 
+                if part[0] == '0' and length > 1:
                     continue
-                if int(part) <= 255:
-                    current_ip.append(part)
-                    backtrack(index + length, parts + 1, current_ip)
-                    current_ip.pop()
-        backtrack(0, 0, [])
+                if int(part) > 255:
+                    continue
+                parts.append(part)
+                backtrack(index + length)
+                parts.pop()
+        backtrack(0)
         return result
-
-
